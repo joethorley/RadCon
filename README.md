@@ -3,7 +3,7 @@ RadCon
 
 RadCon is a phylogenetic tree consensus and comparison program for Mac OS 9.
 
-Implemented methods include the strict reduced consensus methods, leaf stability, cladistic information content, double decay analysis and matrix representation with parsimony. For further information please refer to the [user manual](poissonconsulting.github.io/RadCon).
+Implemented methods include the strict reduced consensus methods, leaf stability, cladistic information content, double decay analysis and matrix representation with parsimony. For further information please refer to the [user manual](https://github.com/poissonconsulting.github.io/RadCon).
 
 Reference:
 
