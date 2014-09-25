@@ -1,0 +1,1 @@
+#include "TDebug.h"#if __DEBUGTDebug::TDebug (const char* name)	: basic_ofstream<char>(){	CHECK (name);		open (name);	if (!is_open ())		throw TXception ("TDebug::open() failed");}TDebug::~TDebug (void){	close ();}TDebug gDebug ("Debug");#endif // __DEBUG

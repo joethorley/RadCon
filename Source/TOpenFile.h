@@ -1,0 +1,1 @@
+#ifndef _TOPENFILE_H#define _TOPENFILE_H#include <iosfwd>#include "TString.h"char* OpenFile (const int id, TString& fileName);#endif // _TOPENFILE_H

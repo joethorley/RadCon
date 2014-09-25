@@ -1,0 +1,1 @@
+#include "TXception.h"#include <string.h>TXception::TXception (void)	: exception ()	, fStr (NULL){}TXception::TXception (const char* str)	: exception (){	fStr = new char [strlen (str) + 1];	strcpy (fStr, str);}TXception::~TXception (void){	if (fStr)		delete (fStr);}

@@ -1,0 +1,1 @@
+#ifndef _TCALC_H#define _TCALC_Hbool IsEven (unsigned int u);int GetUnits (unsigned int u, unsigned int dps = 1);#endif // _TCALC_H

@@ -1,0 +1,1 @@
+#include "Nexus.h"const TString Nexus::fPunctuationCharacters (";,():=[]&*-");const TString Nexus::fWhiteSpaceCharacters ("\t\r\n\v\f ");const TString Nexus::fPunctuationAndWhiteSpaceCharacters (";,():=[]&*-\t\r\n\v\f ");

@@ -1,0 +1,1 @@
+#include "TTime.h"const char* Time (void){	static TString timeString;		time_t now = time(NULL);	timeString = ctime(&now);	if (timeString.Length())		timeString[timeString.Length()-1] = '\0';	return (timeString.Array ());}

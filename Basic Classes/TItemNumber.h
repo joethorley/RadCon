@@ -1,0 +1,1 @@
+// defines type and limit of unsigned int and TItemNumber#ifndef __TITEMNUMBER_H#define __TITEMNUMBER_H#include <limits.h>#include "TFundamentalType.h"typedef TFundamentalType<unsigned int> TItemNumber;#define ITEMNUMBER_MAX 65535Ustatic const unsigned int kMaxItems = ITEMNUMBER_MAX;#endif // __TITEMNUMBER_H

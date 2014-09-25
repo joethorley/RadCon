@@ -1,0 +1,1 @@
+#include "TFlags.h"bool TFlags::IsFlag (const Flags f) const {	return ((bool)((f & fFlags) != 0)); }void TFlags::SetFlag (const Flags f, const bool on) const{	if (on) 		((TFlags*)this)->fFlags = (fFlags | f);					else 		((TFlags*)this)->fFlags = (fFlags & (~f));				}TFlags::TFlags (void) 	: fFlags (0){ }TFlags::~TFlags (void) { }

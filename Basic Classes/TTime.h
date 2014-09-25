@@ -1,0 +1,1 @@
+#ifndef __TTIME_H#define __TTIME_H#include <time.h>#include "TString.h"const char* Time (void);	#endif // __TTIME_H
