@@ -14,7 +14,7 @@ Implemented methods include the strict reduced consensus methods, leaf stability
 Utilization
 -----------
 
-The binary can be downloaded from <https://github.com/poissonconsulting/RadCon/releases> - it only runs on Mac OS 9!
+The [binary](https://github.com/poissonconsulting/RadCon/releases) requires OS9!
 
 Documentation
 ------------
