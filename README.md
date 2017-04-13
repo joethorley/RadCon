@@ -1,5 +1,5 @@
 ![stability-frozen](https://img.shields.io/badge/stability-locked-blue.svg)
-![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)]
+![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
 
 RadCon
 =========
