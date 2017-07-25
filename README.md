@@ -9,7 +9,7 @@ Introduction
 
 RadCon is a phylogenetic tree consensus and comparison program.
 
-Implemented methods include the strict reduced consensus methods, leaf stability, cladistic information content, double decay analysis and matrix representation with parsimony.
+Implemented methods include the strict reduced consensus methods, leaf stability, cladistic information content, [double decay analysis](https://doi.org/10.1080/106351500750049815) and matrix representation with parsimony.
 
 Utilization
 -----------
