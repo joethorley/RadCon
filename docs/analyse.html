@@ -1,0 +1,684 @@
+<html>
+<head>
+<!-- #include file=":INCLUDE:head.html" -->
+
+<link rel="stylesheet" href="manual.css" type="text/css">
+<meta name="author" content="J. L. Thorley and Mark Wilkinson" >
+<meta name="copyright" content="2000, 2001, J. L. Thorley and Mark Wilkinson" >
+
+<!-- /#include -->
+<meta name="robots" content="noindex" >
+<meta name="description" 
+content="The RadCon Manual: Analysing Source Trees">
+<meta name="keywords" 
+content="radcon, manual, help, consensus, phylogenetic, tree, phylogeny, program, comparison, joe, thorley, rod, page, radical, leaf stability">
+
+<title> Analysing Source Trees (The RadCon Manual) </title>
+
+</head>
+
+<!-- #include file=":INCLUDE:start.html" -->
+
+<body bgcolor="#ffffff"><h4 align="right"><font color="#800000">(The RadCon Manual v1.1.2)</font></h4>
+
+<!-- /#include -->
+<hr>
+<br>
+
+<h2>Analysing Source Trees</h2>
+
+<hr>
+<br>
+
+<p>
+The commands for analysing a set of <a 
+href="trees.html#source and consensus trees" class="internal">source 
+trees</a> are grouped together in the bottom half of the <a 
+href="menus.html#source menu" class="internal">Source menu</a>.
+</p>
+
+<p>
+The user should note that the commands are implemented on the subset of 
+source trees that are both <a 
+href="trees.html#selected and deselected trees" 
+class="internal">selected</a> and <a 
+href="trees.html#active and inactive trees" class="internal">active</a>.
+</p>
+<p>
+The <a href="#tree weights" class="internal">weight</a> of a tree determines its influence on an analysis.
+</p>
+
+<p>
+RadCon can calculate the <a href="#positional congruence command" 
+class="internal">Positional Congruence</a> and <a 
+href="#leaf stability command" class="internal">Leaf Stability</a> of the 
+<a href="terms.html#leaf" class="internal">leaves</a> in the source trees. 
+In addition RadCon can perform a <a href="#double decay analysis command" class="internal">Double Decay Analysis</a> 
+on a set of MPTs and output the <a href="#adams consensus"
+class="internal">Adams</a>, <a href="#strict component consensus"
+class="internal">strict Component</a>, <a
+href="#majority-rule component consensus" class="internal">majority-rule 
+Component</a>, <a href="#semi-strict component consensus" class="internal">semi-strict Component</a> and basic <a
+href="#strict reduced consensus" class="internal">strict Reduced</a> 
+Consensus trees of the source trees and convert the source trees into their 
+<a href="#mrp" class="internal">Matrix Representation</a> for supertree construction.
+</p>
+
+<a name="tree weights"></a>
+<hr>
+<br>
+<h2>Tree Weights</h2>
+<p>
+The influence of each tree on an analysis is determined by its weight 
+relative to the other trees. Many tree programs assign the trees in a set 
+equal weight. RadCon, however, allows differential weighting of trees. 
+Consider a set of three source trees of weight 1. These three trees will
+have equal influence on any analysis conducted. Imagine now that two of 
+the trees are identical. If the two identical trees were to be condensed 
+and the remaining copy assigned a weight of 2 then although one of the 
+copies would have been deleted the remaining copy would now have twice the 
+influence and the results of any analysis would be unaffected.
+</p>
+
+<a name="positional congruence command"></a>
+<hr>
+<br>
+
+<h2>Positional Congruence</h2>
+
+<p>
+The Positional Congruence ( <a 
+href="references.html#estabrook:1992:evaluating" 
+class="internal">Estabrook, 1992</a>) of a <a href="terms.html#leaf" 
+class="internal">leaf</a>  is a measure of the agreement, among a set of 
+trees, about the position of the leaf.
+<!--<a href="terms.html#cladistic" class="internal">cladistic</a> relationship of the leaf to the other leaves. -->
+</p>
+
+<p>
+The Positional Congruence measures proposed by Estabrook (1992) are 
+extensions of the tree congruence (similarity) measures proposed by <a 
+href="references.html#estabrook:etal:1985:comparison" 
+class="internal">Estabrook <i>et al.</i> (1985)</a>. These earlier authors 
+defined one measure of the similarity of two <a href="terms.html#root" 
+class="internal">unrooted</a> trees to be the fraction of the total number 
+of the quartets which are resolved and of the same type in the two trees. 
+They called this measure <em>EA Similarity</em> - the acronym EA standing 
+for Explicitly Agree as a quartet must explicitly agree, i.e., be resolved 
+and of the same type in the trees, for it to be counted.  Clearly in two 
+identical <a href="terms.html#bifurcating" class="internal">bifurcating</a> 
+trees all quartets will explicitly agree and they will have an EA 
+Similarity of 1. On the other hand as two trees become more disimilar EA 
+Similarity will decrease to 0.
+</p>
+
+<p>
+<img src="images/poscon.gif" alt="positional congruence output" height=228 
+width=242 align=left hspace=12>
+</p>
+
+<p>
+Estabrook's (1992) contribution was to extend the tree congruence measures 
+of Estabrook <i>et al.</i> (1985) to measure, not the similarity of 
+individual trees but instead, the similarity in placement of each leaf. 
+This was done by considering, for each leaf, only the subset of quartets 
+which include the leaf. Thus Estabrook (1992) defined the EA Similarity of 
+a leaf in two unrooted trees to be the fraction of the total number of the 
+quartets containing the leaf which are resolved and of the same type in the 
+two trees. The user should be aware that the average EA Similarity of the 
+leaves is the EA Similarity of the trees.
+</p>
+
+<p>
+The congruence measures, for trees and leaves, proposed by Estabrook <i>et 
+al.</i> (1985) and Estabrook (1992), can be readily extended to cases with 
+rooted trees or more than two trees by considering <a 
+href="terms.html#resolved triplet" class="internal">resolved triplets</a> and 
+requiring explicit agreement across all the trees, respectively.
+</p>
+
+<p>
+The figure illustrates typical output using an example from Estabrook 
+(1992). The output shows that 66% of the total quartets are resolved and of 
+the same type in the two trees, that 55% of the total quartets containing 
+<i>dasy</i>, <i>pet</i>, <i>octo</i> and <i>myo</i> are resolved and of the 
+same type and that there is more agreement between the two trees regarding 
+the positions of the last three leaves than the other four.
+</p>
+
+<br clear=all>
+<br>
+<a name="leaf stability command"></a>
+<hr>
+<br>
+
+<h2>Leaf Stability (LS)</h2>
+
+<p>
+It is important that phylogeneticists assess the <a 
+href="terms.html#assessing support" class="internal">support</a>  for their 
+<a href="terms.html#phylogenetic inference" class="internal">inferred</a> 
+phylogenetic trees.
+</p>
+
+<p>
+The <a name="leaf stability" class="definition">Leaf Stability</a> (<a 
+href="references.html#thorley:wilkinson:1999:testing" 
+class="internal">Thorley and Wilkinson, 1999</a> ) of a <a 
+href="terms.html#leaf" class="internal">leaf</a> is a measure of the 
+support for the position of that leaf. The method like <a 
+href="#positional congruence command" class="internal">Positional Congruence</a> is 
+quartet/triplet based and the rationale simple. The phylogenetic 
+relationships of a set of leaves are a function of the relationships among 
+each subset of four/three leaves (quartet/triplet). Stable and unstable 
+leaves will tend to occur in stable and unstable quartets/triplets, 
+respectively. The average stability of the quartets/triplets including a 
+leaf provides a measure of the stability of that leaf.
+</p>
+<p>
+<p>
+RadCon currently provides the user with <a href="#leaf stability (bootstrap) command" class="internal">three</a> 
+<a href="terms.html#bootstrap" 
+class="internal">bootstrap</a> based measures of the stability of 
+quartets/triplets and <a href="#leaf stability (decay index) command" class="internal">one</a> other measure based on 
+the <a href="terms.html#decay index" class="internal">decay index.</a>
+</p>
+
+<br clear=all>
+<br>
+<a name="leaf stability (bootstrap) command"></a>
+<hr>
+<br>
+
+<h2>Leaf Stability (Bootstrap)</h2>
+
+<p>
+<img src="images/leafstab.gif" alt="leaf stability" height=313 width=278 
+align=left hspace=12>
+</p>
+
+<p>
+RadCon currently provides the user with three <a href="terms.html#bootstrap" 
+class="internal">bootstrap</a> based measures of the stability of 
+quartets/triplets. The first measure, <a name="maximum" 
+class="definition">Maximum</a>, is the bootstrap proportion (BP) of the 
+resolution of the quartet which occurs in the greatest proportion of 
+bootstrap trees. The second measure, <a name="difference" 
+class="definition">Difference</a>, is the difference between the BPs of the 
+two resolutions of the quartet which occur in the greatest and second 
+greatest proportion of bootstrap trees. The third measure <a name="difference" 
+class="definition">Entropy</a> is the entropy of the BPs of the resolutions of the 
+quartet.
+
+Other LS measures based on the 
+bootstrap or other methods for assessing the stability of 
+quartets/triplets, i.e., the Decay Index, are possible.
+</p>
+
+<p>
+The figure illustrates typical output using the example from Thorley and 
+Wilkinson (1999). When either measure is used <i>Whatch</i> is the least 
+stable leaf.
+</p>
+
+<br clear=all>
+<br>
+<a name="leaf stability (decay index) command"></a>
+<hr>
+<br>
+
+<h2>Leaf Stability (Decay Index)</h2>
+
+<p>
+	 The Leaf Stability (Decay Index) measure uses the <a href="terms.html#decay index" class="internal">decay index</a> 
+	 to quantify the support for the position of each leaf in a 
+	 set of Most Parsimonious Trees (MPTs)
+</p>
+	 
+	 <p>
+	The procedure for calculating this LS measure is identical to that for a <a href="#double decay analysis command" class="internal">Double Decay Analysis</a>.  
+	In fact when a Double Decay 
+	Analysis is performed the stabilities of the leaves in the MPTs, as measured by the Leaf Stability (Decay Index), are also provided. 
+	</p>
+	<p>
+	Leaf Stability (Decay Index) is currently 
+	available for sets of rooted and unrooted MPTs with no more than 50 and 25 leaves, respectively.
+	</p>
+
+	
+<a name="double decay analysis command"></a>
+<hr>
+<br>
+
+<h2>Double Decay Analysis</h2>
+
+<p>
+	 <a name="maximum" 
+class="definition">Double Decay Analysis (DDA)</a> (the reader is referred 
+to <a href="references.html#wilkinson:etal:2000:chain" class="internal">Wilkinson etal. (2000)</a> for a more complete exposition of the method)
+provides a complete summary of the support, as measured by the <a href="terms.html#decay index" class="internal">decay index</a>, 
+for all the full and partial <a href="terms.html#split" class="internal">splits</a> common to a set of most parsimonious trees (MPTs).
+	</p>
+<p>
+	 Traditional Decay Analysis (TDA) only gives the support for the full splits.  The full splits are often poorly supported but the partial splits may have high levels of support.  
+	 TDA consequently paints an incomplete and often misleading picture.
+</p>
+<p>
+	 DDA first calculates the decay indices of all the triplets/quartets common to all the MPTs and then fuses them up to give the decay indices of all the more inclusive splits.
+	 These splits along with their decay indices are presented in a partition table and a profile of support trees produced.  RadCon currently only calculates the 
+	 set of basic support trees, which in and of themselves, capture all the information in the partition table.  However, the largest, most resolved or most informative support tree may be 
+	 one of the derivative support trees, which are produced by fusing together one or more basic trees.  The next release of RadCon should allow the generation
+	 of derivative support trees.
+</p>
+<p>
+	 RadCon is unable to calculate the parsimony lengths of trees which necessitates the use of PAUP 4 (note this or later versions of PAUP must be used because 
+	 the earlier versions cannot perform parsimony analysis with small backbone constraints) to calculate the decay indices of the triplets/quartets.  The following procedure should be followed:
+	 
+	 <ol>
+			<li>In PAUP 4 open the data file.</li>
+			<li>In PAUP 4 perform a parsimony analysis.</li>
+			<li>In PAUP 4 save the set of MPTs to a file in NEXUS format.</li>
+			<li>In RadCon open the NEXUS format file containing the MPTs.</li>
+			<li>In RadCon select the Double Decay Analysis -> Output... command from the Source menu.</li>
+			(Note RadCon currently only performs DDA on sets of rooted MPTs with no more than 50 leaves.)
+			<li>In RadCon choose a single leaf to act as the outgroup leaf.</li>
+			(Note A quartet is the smallest split on which characters can be mapped and so an outgroup leaf is required to act as the root or fourth leaf in each 'triplet.') 
+			<li>In RadCon choose the search options.</li>
+			<li>In RadCon name the file to which the backbone constraints and search options are to be saved.</li>
+			<li>In PAUP 4  execute the file containing the backbone constraints and search options (with the original data set active)</li>
+			<li>Wait for PAUP 4 to complete the searches.</li>
+			<li>In RadCon select the Double Decay analysis -> Input... command from the Source menu (with the MPTs active).</li>
+			<li>In RadCon choose the same leaf to act as the outgroup leaf again. </li>
+			<li>In RadCon enter the length of the MPTs.</li>
+			<li>In RadCon open the file containing the backbone constraints and search options.</li>
+			<li>in RadCon open the file to which PAUP 4 logged the results of the searches.</li>
+			(Note this file should be in the same folder as the file containing the backbone constraints and search options and should have the same name as this file
+			followed by '.log.')
+			<li>Wait while RadCon inputs and processes everything.</li>
+			<li>Enjoy at your leisure!</li>
+	 </ol>
+</p>
+
+<a name="conventional consensus command"></a> <a 
+name="consensus methods and trees"></a>
+<a name="supertree consensus command"></a>
+<hr>
+<br>
+
+<h2>Consensus Methods and Trees</h2>
+
+<p>
+Consensus methods allow phylogeneticists to represents sets of trees in the 
+form of consensus trees.
+</p>
+
+<p>
+The plethora of available consensus methods is a reflection of the 
+diversity of ways of achieving a consensus in the face of conflict. Many 
+consensus methods can be classified according to the <a 
+href="terms.html#tree substructure" class="internal">tree substructure</a> 
+they capture and the level of agreement between the source trees required.
+Consensus methods that fall within this classification are the 
+Adams consensus method, the family of component consensus methods and the 
+family of reduced consensus methods which capture <a 
+href="terms.html#nesting" class="internal">nestings</a>, <a 
+href="terms.html#full split" class="internal">full splits</a> and all (full 
+and <a href="terms.html#partial split" class="internal">partial) 
+splits</a>, respectively. With regard to the level of agreement strict, 
+semi-strict and majority-rule consensus methods require total agreement, no 
+conflict and greater than 50% agreement, respectively. So, for example, for 
+an <a href="terms.html#internal branch" class="internal">internal 
+branch</a> to appear in the strict component consensus tree the full split 
+it corresponds to must have occurred in all the source trees.
+</p>
+
+<p>
+RadCon provides the user with the <a href="#adams consensus" 
+class="internal">Adams</a> (strict nesting), <a 
+href="#strict component consensus" class="internal">strict component</a>, 
+<a href="#strict basic reduced consensus" class="internal">strict basic 
+reduced</a>, <a href="#semi-strict component consensus" 
+class="internal">semi-strict component</a> and <a 
+href="#majority-rule component consensus" class="internal">majority-rule 
+component</a> consensus methods. These methods are grouped under the <span 
+class="menucommand">Conventional Consensus</span> submenu (in the <a 
+href="menus.html#source menu" class="internal">Source menu</a>) because 
+they require the source trees to have identical sets of <a 
+href="terms.html#leaf" class="internal">leaves</a>. In contrast <span 
+class="menucommand">Supertree Consensus</span> methods do not require the 
+source trees to have identical sets of leaves. Consensus methods in this 
+second class are typically used to 'fuse' trees with different (but 
+overlapping) sets of leaves to produce supertrees - consensus trees with 
+all the leaves in at least one of the source trees. <a href="#mrp" 
+class="internal">MRP</a> is the only supertree consensus method currently 
+implemented in RadCon. See <a class="internal" href="references.html#sanderson:etal:1998:phylogenetic">Sanderson et 
+al (1998)</a> for a review of supertrees and a discussion of MRP.
+</p>
+
+<a name="adams consensus"></a>
+<hr>
+<br>
+
+<h2>Adams (Strict Nesting) Consensus</h2>
+
+<p>
+It is fitting that we start our discussion of consensus methods here as the 
+Adams was the first consensus method to be proposed (Adams, 
+1972). The  method resolves conflict by pulling <a 
+href="terms.html#leaf" class="internal">leaves</a>, which occur in variable 
+positions on the source trees, down towards the <a href="terms.html#root" 
+class="internal">root</a> of the consensus tree. (note: the method is only 
+defined for set of <a href="terms.html#rooted" class="internal">rooted</a> 
+source trees).
+</p>
+
+<p>
+More formally the Adams consensus tree captures strict <a 
+href="terms.html#nesting" class="internal">nestings</a>, i.e., the 
+internal branches in the Adams consensus tree correspond to those nestings 
+which occur in all the rooted source trees.
+</p>
+
+<p>
+<table border="0" cellspacing="0" cellpadding="0" width="600" 
+height="156">
+    
+    <tr>
+	<td><img src="images/consensussource1.gif" alt="a source tree"width="200" 
+	height="154" border="0"></td><td><img src="images/consensussource2.gif" 
+	alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusadams.gif" alt="a source tree"width="200" height="154" border="0"></td>
+    </tr>
+    <tr>
+	<td align="center">source 1</td><td align="center">source 2</td><td align="center">adams</td>
+    </tr>
+    
+</table>
+</p>
+
+<p>
+Clearly, in the two source trees leaf 4 occurs in variable positions and in 
+the Adams consensus tree has been pulled down to the internal node 
+corresponding to the most recent common ancestor of the alternative 
+positions. Even though this example is simple to understand it illustrates 
+the problem of ambiguity which is a shortcoming of the Adams consensus 
+method. The polytomy in the Adams consensus tree is ambiguous because it 
+cannot be determined if leaf 3 and/or leaf 4 occurs in variable positions 
+in the source trees. Ambiguity means that the Adams consensus tree may 
+provide little cladistic <a href="measures.html#information" 
+class="internal">information</a> despite being moderately <a 
+href="measures.html#resolution" class="internal">resolved</a>.
+</p>
+
+<a name="strict component consensus"></a>
+<hr>
+<br>
+
+<h2>Strict Component Consensus</h2>
+
+<p>
+Amid a slew of contradictory papers attempting to quantify the congruence 
+(agreement) of various methods of <a 
+href="terms.html#phylogenetic inference" class="internal">phylogenetic 
+inference</a>, Sokal and Rohlf (1981) proposed a consensus method which 
+produces a single consensus tree which displays all and only those <a 
+href="terms.html#full split" class="internal">full splits</a> (components) 
+occuring in all the source trees. Although more commonly referred to in the 
+literature as the <em>strict consensus</em> method we adopt the consensus 
+terminology of <a href="references.html#wilkinson:1994:common" 
+class="internal">Wilkinson (1994)</a> which includes qualifiers specifiying 
+both the agreement required between the source trees, i.e., strict, and the 
+tree substructure captured, i.e., component.
+</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0" width="600" 
+height="156">
+    
+    <tr>
+	<td><img src="images/consensussource1.gif" alt="a source tree"width="200" 
+	height="154" border="0"></td><td><img src="images/consensussource2.gif" 
+	alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusstrictcomponent.gif" alt="a source tree"width="200" height="154" border="0"></td>
+    </tr>
+    <tr>
+	<td align="center">source 1</td><td align="center">source 2</td><td 
+	align="center">strict component</td>
+    </tr>
+    
+</table>
+</p>
+
+<p>
+The strict component consensus tree contains a single internal branch - 
+that which partitions leaf 5 and the <a
+href="terms.html#leaf" class="internal">root</a> from the remaining 
+leaves - and corresponds to the only full split common to the two source 
+trees. This example nicely  illustrates a potential limitation of the strict component 
+consensus tree - its insensitivity, i.e. the tree is largely <a 
+href="measures.html#resolution" class="internal">unresolved</a> despite the 
+ocurrence of much shared <a href="terms.html#cladistic" 
+class="internal">cladistic</a> structure.
+</p>
+
+<a name="strict reduced consensus"></a> <a 
+name="strict basic reduced consensus"></a>
+<hr>
+<br>
+
+<h2>Strict Reduced Consensus</h2>
+
+<p>
+The strict reduced consensus method has a more recent history than the 
+Adams and strict component consensus methods. It was proposed by <a
+href="references.html#wilkinson:1994:common" class="internal">Wilkinson 
+(1994)</a> to overcome the limitations of these two earlier methods, i.e., 
+ambiguity and insensitivity, respectively. Informally, the method can be 
+described as overcoming these 
+problems through the exclusion from the consensus tree of leaves whose 
+variability in position prevents unambiguous representation of the remaining 
+leaves. Often different combinations of leaves can be excluded to achieve 
+unambiguity a phenomenon that results in the method outputting a set or 
+<em>profile</em> of 
+strict reduced consensus trees. 
+More formally, the method identifies
+the full and partial splits common to the source trees and represents them in 
+the form of one of more trees. 
+</p>
+<p>
+The user should be aware that trees in the same reduced consensus profile 
+are not conflicting alternatives. The trees in the same profile are 
+compatible and complementary and each provides additional information about 
+the relationships common to the source trees. If a choice is necessary the 
+user can use <a href="measures.html#information" class="internal">Cladistic Information Content</a> 
+(CIC) to identify the most informative tree.
+</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0" width="800" 
+height="156">
+    
+    <tr>
+	<td><img src="images/consensussource1.gif" alt="a source tree"width="200" 
+	height="154" border="0"></td><td><img src="images/consensussource2.gif" 
+	alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusstrictcomponent.gif" alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusstrictreduced.gif" alt="a source tree"width="200" height="154" border="0"></td>
+    </tr>
+    <tr>
+	<td align="center">source 1</td><td align="center">source 2</td><td 
+	align="center">strict reduced 1</td><td 
+	align="center">strict reduced 2</td>
+    </tr>
+    
+</table>
+</p>
+
+
+<p>
+In the above example there are two trees in the strict reduced consensus 
+profile with CICs of 2.807 and 3.907 bits, respectively. 
+</p>
+<p>
+The user should be aware that RadCon currently only produces the basic 
+strict reduced consensus profile of a set of source trees. Although the 
+basic trees capture all the split information common to the source trees 
+it is often possible to fuse basic trees to produce derivative trees 
+(Wilkinson, 
+1995). Derivative trees represent new combinations of the split 
+information in the basic trees and the tree with the highest CIC may be a 
+derivative tree. Derivative strict reduced consensus trees will be added 
+to a later version of RadCon.
+</p>
+
+<a name="semi-strict component consensus"></a>
+<hr>
+<br>
+<h2>Semi-Strict Component Consensus</h2>
+<p>
+The semi-strict component consensus method, which is also known as the 
+combinable components consensus method, was developed by Bremer (1982).
+The method produces a single consensus tree whose internal 
+branches represent full splits which occur in at least one of the 
+source trees and are compatible with all the source trees. 
+</p>
+<p>
+The consensus tree produced will only differ from the strict component 
+consensus tree if one or more of the source trees contains a <a
+href="terms.html#polytomy" class="internal">polytomy</a>. 
+</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0" width="600" 
+height="156">
+    
+    <tr>
+	<td><img src="images/consensussource1.gif" alt="a source tree"width="200" 
+	height="154" border="0"></td><td><img src="images/consensusstrictcomponent.gif" 
+	alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusstrictcomponent.gif" alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensussource1.gif" alt="a source tree"width="200" height="154" border="0"></td>
+    </tr>
+    <tr>
+	<td align="center">source 1</td><td align="center">source 2</td><td 
+	align="center">strict component</td><td 
+	align="center">semi-strict component</td>
+    </tr>
+    
+</table>
+</p>
+
+<a name="majority-rule component consensus"></a>
+<hr>
+<br>
+
+<h2>Majority-Rule Component Consensus</h2>
+<p>
+The majority-rule component consensus method was developed by Margush and 
+McMorris. The internal branches in the single consensus tree 
+correspond to those full splits (components) which occur in more than half 
+the source trees. Typically the internal branches are labelled with their
+frequency of occurrence in the source trees. The method is useful when a 
+well resolved consensus tree is required. Additional resolution can be 
+achieved by adding minority-compatible components, i.e., components which 
+occur in less than 50% of the source trees and do not conflict with the 
+components currently in the consensus tree.
+</p>
+<p>
+The method is most commonly used for summarising the results of a 
+<a href="terms.html#bootstrap" class="internal">bootstrap</a> analysis. It 
+is well suited for this purpose as the consensus tree displays the best supported full 
+splits with their BPs (note: the frequency of occurrence 
+of a full split in a set of bootstrap trees is its BP).
+</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0" width="600" 
+height="156">
+    
+    <tr>
+	<td><img src="images/consensussource1.gif" alt="a source tree"width="200" 
+	height="154" border="0"></td><td><img src="images/consensussource3.gif" 
+	alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensussource4.gif" alt="a source tree"width="200" height="154" border="0"></td><td><img 
+	src="images/consensusmajoritycomponent.gif" alt="a source tree"width="200" height="154" border="0"></td>
+    </tr>
+    <tr>
+	<td align="center">source 1</td><td align="center">source 2</td><td 
+	align="center">source 3</td><td 
+	align="center">majority-rule   component</td>
+    </tr>
+    
+</table>
+</p>
+
+
+<a name="show all components"></a>
+<hr>
+<br>
+
+<h2>Show All Components</h2>
+
+<p>
+RadCon also gives the user the option to list, in the <a
+href="windows.html#log window" class="internal">Log window</a>, all the components (full 
+splits) that occur in the source trees with their frequency of occurrence 
+(note: when the trees are a set of <a href="terms.html#bootstrap" 
+class="internal">bootstrap</a> 
+trees the frequency of occurrence of a full split is its BP). Displaying all 
+full splits allows the user to assess the support for, or stability of, 
+alternative hypothesis. In addition RadCon is able to calculate the 
+difference between the frequency of each full split and its strongest 
+competitor, i.e., the frequency of the incompatible split which occurs in 
+the greatest proportion of the trees. If the incompatible split occurs in a 
+greater proportion of the trees then the difference will be negative.
+</p>
+
+<a name="mrp"></a>
+<a name="mrp command"></a>
+<hr>
+<br>
+
+<h2>MRP</h2>
+<p>
+MRP, which stands for Matrix Representation with Parsimony analysis, was 
+independently proposed as a way of combining trees by <a href="references.html#baum:1992:combining" class="internal">Baum (1992)</a>  and 
+<a href="references.html#ragan:1992:phylogenetic" class="internal">Ragan (1992)</a>. MRP is a supertree consensus method as the source trees are 
+not required to have identical sets of <a href="terms.html#leaf"
+class="internal">leaves</a>. RadCon converts a set of source trees into 
+a matrix of binary characters for input into PAUP. The trees can be represented 
+as components or <a href="terms.html#resolved triplet" class="internal">resolved triplets/quartets</a> if 
+<a href="terms.html#root" class="internal">rooted/unrooted</a>. The only 
+limitation is that the number of cells in the matrix is less than 10<sup>6</sup>.
+</p>
+
+<!-- #include file=":INCLUDE:gototoc.html" -->
+
+<hr><br><p>Go to the <a href="manual.html#contents" class="internal">Table of Contents</a>.</p>
+
+
+<!-- /#include -->
+<hr>
+<br>
+<!-- #lastmodified text="This page was last modified" form="long" -->
+This page was last modified May 3, 2001
+<!-- /#lastmodified -->
+</p>
+
+<!-- #include file=":INCLUDE:end.html" -->
+
+
+
+<p>This page is maintained by <a HREF="mailto:joe@poissonconsulting.ca" class="external">
+joe@poissonconsulting.ca</a></p>
+
+
+<hr><br>
+
+
+<p>&#169; Copyright 1999, 2000, 2001, Joseph L. Thorley and Mark Wilkinson. All rights reserved.</p>
+
+
+
+<hr>
+
+<!-- /#include -->
+</body>
+
+</html>
